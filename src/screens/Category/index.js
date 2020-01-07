@@ -5,8 +5,8 @@ import { View } from 'native-base';
 import styles from '../../styles/style_mobile';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const CategoryScreen = ({ }) => {
-    return (<View style={styles.bg_primary}>
+const CategoryScreen = ({...props }) => (
+   <View style={styles.bg_primary}>
         <View style={styles.header_mobile}>
             <Text style={styles.title_ticket}>Danh mục</Text>
         </View>
@@ -26,14 +26,14 @@ const CategoryScreen = ({ }) => {
                         <Text style={styles.txt_btn_user}>Quản lý SDB </Text>
                         <Icon name="md-add" color='#fff' size={18} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btn_user}>
+                    <TouchableOpacity style={styles.btn_user} onPress={() => props.onCetreon()}>
                         <Text style={styles.txt_btn_user}>Quản lý Cetreon </Text>
                         <Icon name="md-add" color='#fff' size={18} />
                     </TouchableOpacity>
                 </View>
             </View>
         </View>
-    </View>);
-};
+    </View>
+);
 export default CategoryScreen;
 //# sourceMappingURL=index.js.map

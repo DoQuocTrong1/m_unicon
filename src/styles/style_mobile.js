@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     marginBottom:20,
+   
   },
   searchIcon: {
     padding: 10,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1
   },
-  box_list_content: { height: '100%' },
+  box_list_content: { height: '100%',  width: deviceWidth-50, flex: 1},
 
   //end Ticket Screen
 
@@ -185,39 +186,93 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     display: 'none',
 
-  },
-  tab_pane: {
+},
+tab_pane: {
     color: '#878787',
     lineHeight: 26,
     paddingTop: 15
-  },
-  box_add_new_content: {
+},
+box_noti_ticket: {
     flex: 1,
-    flexDirection:'column',
-  },
-  txt_box_add_new: {
+    padding: 20
+},
+box_add_new_content: {
+    flex: 1,
+    flexDirection: 'column',
+},
+txt_box_add_new: {
     fontSize: 18,
     color: '#fff',
     marginTop: 0
-  },
-  box_noti_ticket: {
+},
+box_noti_ticket: {
     flex: 1,
     padding: 20
-  },
-  form_add:{
-    padding:10,
-    flexDirection:'column'
-  },
-  group_inline:{
-    display:'flex',
-    justifyContent:'space-between'
-  },
-  txt_group_inline:{
-    color:'#fff',
-    fontSize:18,
+},
+form_add: {
+    padding: 10,
+    flexDirection: 'column'
+},
+group_inline: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginBottom: 10,
+    alignItems: 'center',
+},
+txt_group_inline: {
+    color: '#fff',
+    fontSize: 16,
+    flex: 1
 
-  },
-
+},
+btn_group_inline: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+},
+txt_btn_group: {
+    color: '#F17128',
+    textAlign: 'center',
+    paddingLeft: 5
+},
+row_addTicket: {
+    flex: 1,
+    flexDirection: 'row',
+},
+btn_registration: {
+    backgroundColor: '#F17128',
+    alignItems: 'center',
+    borderColor: '#F17128',
+    width: '95%',
+    height: 60,
+    paddingTop: 15,
+    margin: 10,
+    borderRadius: 5,
+},
+btn_save_Ticket: {
+    flex: 1,
+    width: '50%',
+    backgroundColor: '#F17128',
+    alignItems: 'center',
+    borderColor: '#F17128',
+    height: 50,
+    margin: 5,
+    paddingTop: 15,
+    borderRadius: 5
+},
+btn_reset_Ticket: {
+    flex: 1,
+    width: '50%',
+    backgroundColor: '#2d3035',
+    alignItems: 'center',
+    borderColor: '#fff',
+    height: 50,
+    margin: 5,
+    paddingTop: 15,
+    borderRadius: 5,
+    borderWidth: 1
+},
   //End Add Ticket
 
   //Notification 

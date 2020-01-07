@@ -1,11 +1,10 @@
 import * as React from 'react';
 import UserScreen from '../../screens/User';
 import AsyncStorage from '@react-native-community/async-storage';
-
-import LoginScreen from '../../containers/Login';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import RNRestart from 'react-native-restart'; 
+
 export class User extends React.Component {
     async logout() {
         const { token } = AsyncStorage.getItem('@TOKEN');
