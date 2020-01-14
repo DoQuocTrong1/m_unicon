@@ -21,8 +21,6 @@ const BoxAdd = ({ routesState, sceneMap }) => {
                 return <Chart data={dataLine} />;
             case 'second':
                 return <Chart data={dataBar} />;
-            case 'three':
-                return <Chart data={dataLine} />;
             default:
                 return null;
         }

@@ -1,39 +1,45 @@
 import * as React from 'react';
 import CategoryScreen from '../../screens/Category';
+import { Dimensions, StyleSheet } from 'react-native';
+import styles from '../../styles/style_mobile';
+
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import Cetreon from './Cetreon';
+import Collapsible from 'react-native-collapsible';
 
-export class Category extends React.Component {
+export default class Menu extends React.Component {
     static navigationOptions = {
         header: null,
     };
-    cetreon() {
-        try{
-            this.props.navigation.navigate('Cetreon');
-        }
-        catch (err) {
-            console.log('err', err);
-        }
-        
+    constructor(props) {
+        super(props);
+        this.state = { collapsed: true, collapsed2: true };
     }
+    getCetreon() {
+        this.props.navigation.navigate('DetailCetreon');
+    }
+
+    toggleExpanded() {
+        this.setState({ collapsed: !this.state.collapsed });
+    };
+    toggleExpanded2() {
+        this.setState({ collapsed2: !this.state.collapsed2 });
+    };
+
+
     render() {
-        return (<CategoryScreen onCetreon={() => this.cetreon()}/>);
+        return (<CategoryScreen
+            onToggle={() => this.toggleExpanded()}
+            onToggle2={() => this.toggleExpanded2()}
+            onCetreon={() => this.getCetreon()}
+            collapsed={this.state.collapsed}
+            collapsed2={this.state.collapsed2} />);
     }
 }
 
-const MainNavigator = createStackNavigator({
-    Category: { screen: Category },
-    Cetreon: { screen: Cetreon },
-},
-    {
-        defaultNavigationOptions: {
-            header: null
-        },
-    });
 
-const Categorys = createAppContainer(MainNavigator);
 
-export default Categorys;
+
+
 //# sourceMappingURL=index.js.map

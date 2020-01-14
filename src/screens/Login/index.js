@@ -6,8 +6,7 @@ import styles from '../../styles/style_mobile';
 const Login = ({ ...props }) => (<Container style={styles.bg_primary}>
         <Content>
             <View style={styles.login_logo}>
-                <Image style={styles.logo} source={require('../../images/logo.png')}/>
-                <Text style={styles.txt_logo}>FPT.HyperSM Platform Login</Text>
+                <Image style={styles.logo} source={require('../../images/logo1.png')}/>
             </View>
             <View>
                 {props.loginForm}

@@ -1,47 +1,32 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { View, Dimensions,FlatList } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import { FlatList, View, ActivityIndicator, } from 'react-native';
 import { Button, Text } from 'native-base';
 import axios from 'axios';
 import { normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
+import { ListItem, SearchBar } from 'react-native-elements';
 const BASE_URL = 'http://kong8000-unicorn1.paas.xplat.fpt.com.vn/';
 
-function Item({ name, address }) {
-    return (
-        <View style={{
-            flex: 5,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            borderBottomWidth: 1,
-            borderColor: '#fff',
-            marginBottom: 10
-        }}>
-            <Text style={{
-                color: '#fff',
-                flex: 3,
-                height: 100,
-                textAlign: 'left',
-            }}>{name}</Text>
-            <Text style={{
-                color: '#fff',
-                flex: 2,
-                textAlign: 'right',
-                borderLeftWidth: 1,
-                borderColor: '#fff',
-                alignItems: 'center'
-            }}>{address}</Text>
-        </View>
-    );
-}
+
 export default class Host extends Component {
     constructor(props) {
         super(props);
-        this.state = { isLoading: true, data: "" }
+        this.state = { isLoading: true, data: [] };
     }
-    callApi = async (schema) => {
-        const fullUrl = `${BASE_URL}hosts/listhost`;
+    static navigationOptions = {
+        header: null,
+    };
+    componentDidMount() {
+        this.callListHost();
+    }
+
+    callListHost = async (schema) => {
+        const fullUrl = `${BASE_URL}centreon/hosts/listhost`;
         const value = await AsyncStorage.getItem('@TOKEN');
         return axios({
             method: 'POST',
@@ -55,7 +40,7 @@ export default class Host extends Component {
             console.log('response', response.data.data);
             this.setState({
                 isLoading: false,
-                data: response.data.data,
+                data: response.data.data.result,
             })
             const camelizedJson = camelizeKeys(response.data);
             if (response.data.status_code !== 200) {
@@ -66,22 +51,76 @@ export default class Host extends Component {
                 : camelizedJson;
         });
     };
-    componentDidMount() {
-        this.callApi();
-    }
 
+    addTicket() {
+        this.props.navigation.navigate('Profile')
+    }
+    renderSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: '86%',
+                    backgroundColor: '#2d3035',
+                    marginLeft: '14%',
+                }}
+            />
+        );
+    };
+
+    searchFilterFunction = text => {
+        this.setState({
+            value: text,
+        });
+        const newData = this.state.data.filter(item => {
+            const itemData = `${item.name.toUpperCase()} ${item.address.toUpperCase()} `;
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+        });
+        this.setState({
+            data: newData,
+        });
+    };
+
+    renderHeader = () => {
+        return (
+            <SearchBar
+                placeholder="Nhập từ khóa cần tìm kiếm"
+                onChangeText={text => this.searchFilterFunction(text)}
+                autoCorrect={false}
+                value={this.state.value}
+                onClear={this.callListHost}
+            />
+        );
+    };
     render() {
+        if (this.state.loading) {
+            return (
+                <View style={{ flex: 1 }}>
+                    <ActivityIndicator />
+                </View>
+            );
+        }
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
                     data={this.state.data}
-                    renderItem={({ item }) => <Item
-                        name={item.name}
-                        address={item.address} />}
+                    renderItem={({ item }) => (
+                        <ListItem
+                            title={item.name}
+                            subtitle={item.address}
+                            titleStyle={{ color: 'white', fontWeight: 'bold' }}
+                            subtitleStyle={{ color: 'gray' }}
+                            bottomDivider
+                            containerStyle={{ backgroundColor: '#000' }}
+                        />
+                    )}
                     keyExtractor={item => item.id}
+                    ItemSeparatorComponent={this.renderSeparator}
                     initialNumToRender={20}
-                />
+                    contentContainerStyle={{ paddingBottom: 60 }}
+                    ListHeaderComponent={this.renderHeader} />
             </View>
-        )
+        );
     }
 }

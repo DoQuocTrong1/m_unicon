@@ -152,13 +152,13 @@ class AddTicket extends React.Component {
                                 </View>
                             </View>
                             <View style={styles.form_add}>
-                                <TouchableOpacity style={styles.btn_registration} onPress={() => this.postData()}>
+                                {/* <TouchableOpacity style={styles.btn_registration} onPress={() => this.postData()}>
                                     <Text style={styles.txt_btnLogin}>ĐĂNG KÝ</Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
 
                                 <View style={styles.row_addTicket}>
-                                    <TouchableOpacity style={styles.btn_save_Ticket}>
-                                        <Text style={styles.txt_btnLogin}>SAVE</Text>
+                                    <TouchableOpacity style={styles.btn_save_Ticket} onPress={() => this.postData()}>
+                                        <Text style={styles.txt_btnLogin}>ĐĂNG KÝ</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.btn_reset_Ticket}>
                                         <Text style={styles.txt_btnLogin}>RESET</Text>

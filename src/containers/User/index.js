@@ -5,13 +5,17 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import RNRestart from 'react-native-restart'; 
 
-export class User extends React.Component {
+import Detail from './DetailUser';
+
+class User extends React.Component {
+    DetailUser() {
+        this.props.navigation.navigate('Details');
+    }
     async logout() {
         const { token } = AsyncStorage.getItem('@TOKEN');
         try {
             if (token !== null) {
                 AsyncStorage.removeItem('@TOKEN');
-                // this.props.navigation.navigate('Detail');
                 console.log('token', AsyncStorage.getItem('@TOKEN'))
                 RNRestart.Restart();
             }
@@ -21,8 +25,20 @@ export class User extends React.Component {
         }
     }
     render() {
-        return (<UserScreen onLogout={() => this.logout()} />);
+        return (<UserScreen onLogout={() => this.logout()} onDetail={() => this.DetailUser()} />);
     }
 }
-export default User;
+
+const RootStack = createStackNavigator({
+    Home: User,
+    Details: Detail,
+}, {
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+        header: null
+    },
+});
+
+export default createAppContainer(RootStack);
+
 //# sourceMappingURL=index.js.map

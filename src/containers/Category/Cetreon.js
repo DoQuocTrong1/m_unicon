@@ -16,7 +16,7 @@ const renderTabBar = props => (
     />
 );
 
-export class Centreon extends React.Component {
+export default class Centreon extends React.Component {
     static navigationOptions = {
         header: null
     };
@@ -45,5 +45,5 @@ export class Centreon extends React.Component {
         );
     }
 }
-export default Centreon;
+
 //# sourceMappingURL=index.js.map

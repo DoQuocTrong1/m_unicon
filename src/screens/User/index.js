@@ -4,7 +4,6 @@ import { View } from 'native-base';
 
 import styles from '../../styles/style_mobile';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import LoginScreen from '../../containers/Login';
 const UserScreen = ({...props }) => {
@@ -17,7 +16,7 @@ const UserScreen = ({...props }) => {
                 <View style={styles.box_home}>
                     <View style={styles.box_menu}>
                         <TouchableOpacity style={styles.btn_user}
-                            onPress={() => navigate('Detail')}>
+                            onPress={() => props.onDetail()}>
                             <Text style={styles.txt_btn_user}>Thông tin cá nhân </Text>
                             <Icon name="chevron-right" color='#fff' size={18} />
                         </TouchableOpacity>

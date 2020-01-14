@@ -11,7 +11,7 @@ const TicketScreen = ({ ...props }) => {
             <Text style={styles.title_ticket}>Ticket</Text>
             <Icon.Button
                 name='md-add'
-                color='#F17128'
+                color='#95bd1c'
                 backgroundColor='#22252A'
                 size={30}
                 style={styles.btn_add}
@@ -21,7 +21,7 @@ const TicketScreen = ({ ...props }) => {
 
         <View style={styles.box_home}>
             <View style={styles.box_content}>
-                
+                {props.headerSearch}
                 <View style={styles.box_list_content}>
                     {props.flatList}                  
                 </View>
